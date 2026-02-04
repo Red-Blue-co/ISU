@@ -1,0 +1,92 @@
+/* Matrix Scan Line */
+.isu-scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color, #00ffcc);
+    box-shadow: 0 0 20px var(--primary-color, #00ffcc),
+        0 0 40px var(--primary-color, #00ffcc);
+    z-index: 10000;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: matrixScan 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes matrixScan {
+    0% {
+        top: 0;
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* System Info Overlay */
+.isu-system-info-pane {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9998;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid var(--primary-color, #00ffcc);
+    padding: 15px;
+    border-radius: 4px;
+    color: #fff;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 11px;
+    min-width: 250px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: infoSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes infoSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.isu-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 4px;
+}
+
+.isu-info-label {
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+}
+
+.isu-info-value {
+    color: var(--primary-color, #00ffcc);
+    font-weight: bold;
+}
+
+.isu-info-alert {
+    margin-top: 10px;
+    padding: 6px;
+    background: rgba(255, 204, 0, 0.1);
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    color: #ffcc00;
+    font-size: 10px;
+    text-align: center;
+    border-radius: 2px;
+}

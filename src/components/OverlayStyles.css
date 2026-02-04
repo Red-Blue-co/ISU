@@ -1,0 +1,218 @@
+/* OverlayStyles.css - Dignified Frame Design */
+
+.isu-overlay-container {
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: rgba(10, 10, 15, 0.9);
+    backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+    color: #fff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    --border-color: var(--primary-color, #00ffcc);
+    animation: isuOverlayFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    border-radius: 4px;
+    /* Slight rounding for a premium feel */
+}
+
+@keyframes isuOverlayFadeIn {
+    from {
+        opacity: 0;
+        top: var(--origin-y, 55%);
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Designed Frame Borders */
+.isu-frame-border {
+    position: absolute;
+    background: var(--border-color);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.isu-frame-top {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+}
+
+.isu-frame-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+}
+
+.isu-frame-left {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+}
+
+.isu-frame-right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+}
+
+/* Specialized Corner Accents (L-shapes) */
+.isu-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.isu-corner-tl {
+    top: 0;
+    left: 0;
+    border-top-color: var(--border-color);
+    border-left-color: var(--border-color);
+}
+
+.isu-corner-tr {
+    top: 0;
+    right: 0;
+    border-top-color: var(--border-color);
+    border-right-color: var(--border-color);
+}
+
+.isu-corner-bl {
+    bottom: 0;
+    left: 0;
+    border-bottom-color: var(--border-color);
+    border-left-color: var(--border-color);
+}
+
+.isu-corner-br {
+    bottom: 0;
+    right: 0;
+    border-bottom-color: var(--border-color);
+    border-right-color: var(--border-color);
+}
+
+/* Corner Glow Effect */
+.isu-corner::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    box-shadow: 0 0 15px var(--border-color);
+    opacity: 0.5;
+}
+
+.isu-corner-tl::after {
+    top: 0;
+    left: 0;
+}
+
+.isu-corner-tr::after {
+    top: 0;
+    right: 0;
+}
+
+.isu-corner-bl::after {
+    bottom: 0;
+    left: 0;
+}
+
+.isu-corner-br::after {
+    bottom: 0;
+    right: 0;
+}
+
+/* Close Button - Premium Style */
+.isu-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.isu-close-btn:hover {
+    background: var(--border-color);
+    color: #000;
+    transform: rotate(90deg);
+}
+
+.isu-close-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* Content Area */
+.isu-content {
+    padding: 40px;
+    flex: 1;
+    overflow: auto;
+}
+
+.isu-header {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.isu-header-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--border-color);
+    opacity: 0.6;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.isu-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.isu-header-line {
+    height: 2px;
+    width: 40px;
+    background: var(--border-color);
+    margin-top: 15px;
+    border-radius: 2px;
+}
+
+.isu-inner-content {
+    line-height: 1.6;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+}

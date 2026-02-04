@@ -1,0 +1,26 @@
+:root {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --primary-color: #ffffff;
+  --secondary-color: #1a1a1a;
+  --accent-color: #333333;
+  
+  --font-main: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  font-family: var(--font-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
