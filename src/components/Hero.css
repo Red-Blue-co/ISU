@@ -1,0 +1,82 @@
+/* Hero Styles */
+.isu-hero {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-color);
+}
+
+.isu-hero-bg-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 60vw;
+    background: var(--primary-color);
+    filter: blur(150px);
+    opacity: 0.2;
+    border-radius: 50%;
+    transition: all 0.5s ease;
+}
+
+.isu-hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    text-align: center;
+    pointer-events: none;
+    color: var(--text-color);
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.isu-hero-title {
+    font-size: 15vw;
+    /* Fallback */
+    font-size: clamp(4rem, 15vw, 15rem);
+    /* Responsive scaling */
+    font-weight: 900;
+    margin: 0;
+    line-height: 0.8;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.isu-hero-subtitle {
+    font-size: 1.5rem;
+    /* Fallback */
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    margin-top: 1rem;
+    letter-spacing: 8px;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.isu-hero-managed-by {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    letter-spacing: 4px;
+    color: var(--primary-color);
+    opacity: 0.8;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .isu-hero-bg-effect {
+        width: 90vw;
+        height: 90vw;
+        filter: blur(100px);
+    }
+
+    .isu-hero-subtitle {
+        letter-spacing: 4px;
+        /* Reduced spacing for mobile */
+    }
+}

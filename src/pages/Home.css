@@ -1,0 +1,176 @@
+/* Home Page Styles */
+.isu-home-section {
+    padding: 4rem 2rem;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.isu-home-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.isu-home-text-side {
+    flex: 1;
+    z-index: 10;
+    padding-right: 50px;
+}
+
+.isu-home-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.isu-home-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.isu-home-note {
+    margin-top: 1rem;
+    color: var(--accent-color);
+}
+
+.isu-home-canvas-side {
+    flex: 1;
+    height: 500px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Fallback Blob Styles */
+.isu-blob-fallback-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.isu-blob-anim {
+    width: 300px;
+    height: 300px;
+    filter: blur(20px);
+    opacity: 0.6;
+    border-radius: 50%;
+    box-shadow: 0 0 50px var(--accent-color);
+    transition: all 0.5s ease;
+}
+
+.isu-blob-note {
+    position: absolute;
+    bottom: 10%;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Join Section Specifics */
+.isu-join-section {
+    min-height: 50vh;
+    background: var(--secondary-color);
+}
+
+.isu-join-content {
+    text-align: center;
+}
+
+.isu-join-title {
+    color: var(--bg-color);
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.isu-join-text {
+    color: var(--bg-color);
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+.isu-join-btn {
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    background: var(--bg-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.isu-join-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Animation Keyframes */
+@keyframes morph {
+    0% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.isu-blob-anim {
+    animation: morph 20s linear infinite;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .isu-home-section {
+        padding: 2rem 1rem;
+        min-height: auto;
+    }
+
+    .isu-home-container {
+        flex-direction: column !important;
+        /* Stack vertically on mobile */
+    }
+
+    .isu-home-text-side {
+        padding-right: 0;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .isu-home-canvas-side {
+        height: 350px;
+        /* Smaller canvas for mobile */
+        width: 100%;
+        order: -1;
+        /* Move blob to top visuals often look better on top on mobile */
+    }
+
+    .isu-home-title {
+        font-size: 2rem;
+    }
+
+    .isu-join-title {
+        font-size: 2rem;
+    }
+}
