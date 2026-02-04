@@ -1,0 +1,52 @@
+/* Responsive Breakpoints & Utilities */
+
+/* Mobile Devices (Portrait) */
+@media (max-width: 768px) {
+    .hide-on-mobile {
+        display: none !important;
+    }
+
+    .flex-col-mobile {
+        flex-direction: column !important;
+    }
+
+    .flex-col-reverse-mobile {
+        flex-direction: column-reverse !important;
+    }
+
+    .w-100-mobile {
+        width: 100% !important;
+    }
+
+    .p-1-mobile {
+        padding: 1rem !important;
+    }
+
+    .text-center-mobile {
+        text-align: center !important;
+    }
+
+    .mt-2-mobile {
+        margin-top: 2rem !important;
+    }
+}
+
+/* Tablet Devices */
+@media (max-width: 1024px) {
+    .hide-on-tablet {
+        display: none !important;
+    }
+}
+
+/* Fluid Typography Helpers */
+.text-fluid-lg {
+    font-size: clamp(3rem, 10vw, 15vw);
+}
+
+.text-fluid-md {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+}
+
+.text-fluid-sm {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}

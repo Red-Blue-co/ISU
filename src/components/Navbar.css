@@ -1,0 +1,68 @@
+/* Navbar Styles */
+.isu-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: transparent;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.isu-nav-logo {
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+    margin-left: 0;
+    text-decoration: none;
+}
+
+.isu-nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.isu-nav-link {
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.isu-nav-link:hover {
+    color: var(--primary-color);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .isu-navbar {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        background: rgba(0, 0, 0, 0.8);
+        /* Add background for readability on mobile */
+        backdrop-filter: blur(10px);
+    }
+
+    .isu-nav-links {
+        gap: 1.5rem;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .isu-nav-link {
+        font-size: 0.8rem;
+    }
+}

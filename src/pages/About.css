@@ -1,0 +1,85 @@
+/* About Page Styles */
+.isu-about-page {
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    padding-top: 120px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.isu-about-container {
+    max-width: 1000px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.isu-about-title {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.isu-about-content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.isu-about-paragraph {
+    margin-bottom: 1.5rem;
+}
+
+.isu-about-subtitle {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.isu-about-quote-box {
+    margin-top: 4rem;
+    padding: 2rem;
+    border-left: 4px solid var(--primary-color);
+    background: rgba(0, 255, 204, 0.05);
+}
+
+.isu-about-quote {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.isu-about-footer {
+    margin-top: 4rem;
+    padding-bottom: 2rem;
+    opacity: 0.5;
+    font-size: 0.9rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .isu-about-page {
+        padding-top: 80px;
+        /* Less top padding on mobile */
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .isu-about-container {
+        padding: 1.5rem;
+    }
+
+    .isu-about-title {
+        font-size: 2.5rem;
+    }
+
+    .isu-about-content {
+        font-size: 1rem;
+    }
+}
