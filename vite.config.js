@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/ISU/', // Correct path for https://vsherin4.github.io/ISU/
+  base: '/', // Correct path for custom domain (isu.sherin.fun)
 })

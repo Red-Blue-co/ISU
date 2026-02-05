@@ -52,8 +52,8 @@ function AppContent() {
         <Navbar />
         <div style={{ minHeight: '100vh', position: 'relative' }}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
           </Routes>
 
