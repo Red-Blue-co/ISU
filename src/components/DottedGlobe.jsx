@@ -112,7 +112,7 @@ const GlobePoints = ({ points, lightsOn, hoveredIndex, selectedIndex, onPointCli
         if (!geometryRef.current || points.length === 0) return;
         const colors = new Float32Array(points.length * 3);
         const colorStandard = new THREE.Color('white'); // Active white glow
-        const colorDim = new THREE.Color('#555555'); // Brighter dull state for better visibility
+        const colorDim = new THREE.Color('#777777'); // Brighter but still "dull" state
 
         for (let i = 0; i < points.length; i++) {
             const hasData = points[i].hasData;
@@ -178,14 +178,14 @@ const GlobePoints = ({ points, lightsOn, hoveredIndex, selectedIndex, onPointCli
                     // Stickiness factor: If we're already hovering a point and the mouse is still very close, don't change it.
                     // This prevents rapid jittering in dense areas.
                     if (hoveredIndex !== null) {
-                        const dSq = contactPoint.distanceSqTo(points[hoveredIndex]);
+                        const dSq = contactPoint.distanceToSquared(points[hoveredIndex]);
                         if (dSq < 0.005) return;
                     }
 
                     let minDist = Infinity;
                     let nearestIdx = -1;
                     for (let i = 0; i < points.length; i++) {
-                        const d = contactPoint.distanceSqTo(points[i]);
+                        const d = contactPoint.distanceToSquared(points[i]);
                         if (d < minDist) {
                             minDist = d;
                             nearestIdx = i;

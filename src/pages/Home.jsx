@@ -2,6 +2,7 @@ import React, { Suspense, useState, useEffect } from 'react';
 import Hero from '../components/Hero';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { Link } from 'react-router-dom';
 import SplineBlob from '../components/SplineBlob';
 import InteractiveText from '../components/InteractiveText';
 import { useTheme } from '../context/ThemeContext';
@@ -81,12 +82,14 @@ const Home = () => {
                     <p className="isu-join-text" style={{ color: currentTheme.colors.bg }}>
                         Organized and managed by ISU students for the student world.
                     </p>
-                    <button className="isu-join-btn" style={{
-                        background: currentTheme.colors.bg,
-                        color: currentTheme.colors.primary
-                    }}>
-                        Get Started
-                    </button>
+                    <Link to="/login">
+                        <button className="isu-join-btn" style={{
+                            background: currentTheme.colors.bg,
+                            color: currentTheme.colors.primary
+                        }}>
+                            Get Started
+                        </button>
+                    </Link>
                 </div>
             </div>
 

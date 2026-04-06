@@ -78,8 +78,7 @@ const MagicCursor = () => {
                     pointer-events: none;
                     z-index: 10001;
                     transform: translate3d(-100px, -100px, 0);
-                    transition: transform 0.08s cubic-bezier(0.23, 1, 0.32, 1), 
-                                width 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
+                    transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
                                 height 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
                                 margin 0.3s cubic-bezier(0.23, 1, 0.32, 1),
                                 border-radius 0.3s cubic-bezier(0.23, 1, 0.32, 1),

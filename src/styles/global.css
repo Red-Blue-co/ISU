@@ -1,8 +1,9 @@
+@import './variables.css';
+
 * {
     cursor: none !important;
 }
 
-@import './variables.css';
 
 html,
 body {

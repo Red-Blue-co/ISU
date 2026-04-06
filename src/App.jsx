@@ -49,11 +49,11 @@ function AppContent() {
         height: '100vh',
         overflow: loadingComplete ? 'auto' : 'hidden'
       }}>
-        <Navbar />
+        {location.pathname !== '/login' && <Navbar />}
         <div style={{ minHeight: '100vh', position: 'relative' }}>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
           </Routes>
 
