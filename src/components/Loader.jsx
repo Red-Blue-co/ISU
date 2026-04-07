@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLoader } from '../context/LoaderContext';
+import { useTheme } from '../context/ThemeContext';
 
 const Loader = ({ onFinish }) => {
     const { isLoading, message } = useLoader();
+    const { currentTheme } = useTheme();
     const [opacity, setOpacity] = useState(0);
     const [shouldRender, setShouldRender] = useState(false);
 
@@ -31,7 +33,7 @@ const Loader = ({ onFinish }) => {
             left: 0,
             width: '100vw',
             height: '100vh',
-            background: '#000',
+            background: currentTheme.colors.bg,
             zIndex: 9999,
             display: 'flex',
             flexDirection: 'column',
@@ -50,29 +52,29 @@ const Loader = ({ onFinish }) => {
                 <div style={{
                     position: 'absolute',
                     top: 0, left: 0, width: '100%', height: '100%',
-                    border: '2px solid rgba(0, 255, 204, 0.2)',
+                    border: `2px solid ${currentTheme.colors.primary}33`,
                     borderRadius: '50%',
-                    borderTopColor: '#00ffcc',
+                    borderTopColor: currentTheme.colors.primary,
                     animation: 'spin 1.5s linear infinite'
                 }}></div>
                 <div style={{
                     position: 'absolute',
                     top: '15px', left: '15px', width: '70px', height: '70px',
-                    border: '2px solid rgba(0, 255, 204, 0.4)',
+                    border: `2px solid ${currentTheme.colors.primary}66`,
                     borderRadius: '50%',
-                    borderBottomColor: '#00ffcc',
+                    borderBottomColor: currentTheme.colors.primary,
                     animation: 'spin 2s linear infinite reverse'
                 }}></div>
                 <div style={{
                     position: 'absolute',
                     top: '30px', left: '30px', width: '40px', height: '40px',
-                    backgroundColor: '#00ffcc',
+                    backgroundColor: currentTheme.colors.primary,
                     borderRadius: '50%',
                     animation: 'pulse 1s ease-in-out infinite',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    color: '#000',
+                    color: currentTheme.colors.bg,
                     fontWeight: '900',
                     fontSize: '10px',
                     fontFamily: 'sans-serif',
@@ -86,7 +88,7 @@ const Loader = ({ onFinish }) => {
             {message && (
                 <h2 style={{
                     marginTop: '30px',
-                    color: '#fff',
+                    color: currentTheme.colors.text,
                     fontFamily: 'monospace',
                     fontSize: '18px',
                     letterSpacing: '5px',

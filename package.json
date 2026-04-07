@@ -15,6 +15,7 @@
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
+    "canvas-confetti": "^1.9.4",
     "cobe": "^0.6.5",
     "express": "^4.22.1",
     "lucide-react": "^0.563.0",

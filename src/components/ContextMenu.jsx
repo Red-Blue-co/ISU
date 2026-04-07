@@ -80,103 +80,56 @@ const ContextMenu = () => {
             className="isu-context-menu"
             style={{ left: position.x, top: position.y }}
             onClick={(e) => e.stopPropagation()}
+            onMouseLeave={() => setVisible(false)}
         >
-            <div className="isu-menu-section">
-                <div className="isu-menu-header">System Commands</div>
-                <div className="isu-menu-item" onClick={() => window.location.reload()}>
-                    <RefreshCw size={14} /> <span>Refresh Matrix</span>
-                </div>
-                <div className="isu-menu-item" onClick={() => document.documentElement.requestFullscreen()}>
-                    <Maximize size={14} /> <span>Fullscape Mode</span>
-                </div>
-                <div className="isu-menu-item" onClick={handleInspect}>
-                    <Terminal size={14} /> <span>Inspect Matrix</span>
+            <div className="isu-menu-item" onClick={() => window.location.reload()}>
+                <RefreshCw size={14} /> <span>Refresh Page</span>
+            </div>
+            <div className="isu-menu-item" onClick={() => document.documentElement.requestFullscreen()}>
+                <Maximize size={14} /> <span>Toggle Fullscreen</span>
+            </div>
+
+            <div className="isu-menu-item isu-menu-submenu">
+                <Palette size={14} /> <span>Change Theme</span>
+                <div className="isu-menu-submenu-content">
+                    <div className="isu-submenu-container">
+                        {Object.keys(THEMES).map((key) => (
+                            <div
+                                key={key}
+                                className="isu-menu-item"
+                                onClick={() => { applyTheme(key); setVisible(false); }}
+                            >
+                                {THEMES[key].name}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
-            <div className="isu-menu-separator" />
-
-            <div className="isu-menu-section">
-                <div className="isu-menu-header">Calibration</div>
-                <div className="isu-menu-item isu-menu-submenu">
-                    <Palette size={14} /> <span>Visual Themes</span>
-                    <div className="isu-menu-submenu-content">
-                        <div className="isu-submenu-container">
-                            {Object.keys(THEMES).map((key) => (
+            <div className="isu-menu-item isu-menu-submenu">
+                <Settings size={14} /> <span>Theme Colors</span>
+                <div className="isu-menu-submenu-content">
+                    <div className="isu-submenu-container" style={{ padding: '8px' }}>
+                        <div className="isu-color-grid">
+                            {['#00ffcc', '#ff3366', '#ffcc00', '#0077ff', '#ffffff', '#aa00ff', '#55ff00', '#ff6600'].map(color => (
                                 <div
-                                    key={key}
-                                    className="isu-menu-item"
-                                    onClick={() => { applyTheme(key); setVisible(false); }}
-                                >
-                                    {THEMES[key].name}
-                                </div>
+                                    key={color}
+                                    className="isu-color-dot"
+                                    style={{ backgroundColor: color }}
+                                    onClick={() => applyCustomColor('primary', color)}
+                                />
                             ))}
                         </div>
                     </div>
                 </div>
-
-                <div className="isu-menu-item isu-menu-submenu">
-                    <Settings size={14} /> <span>Core Colors</span>
-                    <div className="isu-menu-submenu-content">
-                        <div className="isu-submenu-container" style={{ padding: '12px' }}>
-                            <div className="isu-menu-header">Primary Phase</div>
-                            <div className="isu-color-grid">
-                                {['#00ffcc', '#ff3366', '#ffcc00', '#0077ff', '#ffffff', '#aa00ff', '#55ff00', '#ff6600'].map(color => (
-                                    <div
-                                        key={color}
-                                        className="isu-color-dot"
-                                        style={{ backgroundColor: color }}
-                                        onClick={() => applyCustomColor('primary', color)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <div className="isu-menu-separator" />
 
-            <div className="isu-menu-section">
-                <div className="isu-menu-header">Node Information</div>
-                <div className="isu-menu-item" style={{ opacity: 0.5, cursor: 'default' }}>
-                    <Monitor size={14} /> <span>v1.0.4-STABLE</span>
-                </div>
-                <div className="isu-menu-item" onClick={() => setVisible(false)}>
-                    <X size={14} /> <span>Close Menu</span>
-                </div>
-            </div>
         </div>
     );
 
     return ReactDOM.createPortal(
-        <>
-            {menuContent}
-            {isScanning && <div className="isu-scan-line" />}
-            {showInfo && (
-                <div className="isu-system-info-pane">
-                    <div className="isu-info-row">
-                        <span className="isu-info-label">Matrix Status</span>
-                        <span className="isu-info-value">STABLE</span>
-                    </div>
-                    <div className="isu-info-row">
-                        <span className="isu-info-label">Active Phase</span>
-                        <span className="isu-info-value">{document.body.style.getPropertyValue('--primary-color') || '#00FFCC'}</span>
-                    </div>
-                    <div className="isu-info-row">
-                        <span className="isu-info-label">Display Node</span>
-                        <span className="isu-info-value">{window.innerWidth}x{window.innerHeight}</span>
-                    </div>
-                    <div className="isu-info-row">
-                        <span className="isu-info-label">Latency</span>
-                        <span className="isu-info-value">{(Math.random() * 20 + 5).toFixed(1)}ms</span>
-                    </div>
-                    <div className="isu-info-alert">
-                        SYSTEM_BYPASS: SHIFT + RIGHT-CLICK FOR NATIVE
-                    </div>
-                </div>
-            )}
-        </>,
+        menuContent,
         document.body
     );
 };

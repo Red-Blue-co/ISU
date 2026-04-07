@@ -1,18 +1,18 @@
 .isu-context-menu {
     position: fixed;
     z-index: 9999;
-    min-width: 220px;
-    background: rgba(10, 10, 15, 0.95);
-    backdrop-filter: blur(15px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    min-width: 240px;
+    background: rgba(15, 15, 20, 0.6);
+    backdrop-filter: blur(25px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     font-family: 'Inter', system-ui, sans-serif;
-    animation: menuFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: menuFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     transform-origin: top left;
-    cursor: none;
+    cursor: default;
 }
 
 @keyframes menuFadeIn {
@@ -45,20 +45,25 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 12px;
-    color: #fff;
-    font-size: 14px;
+    padding: 10px 14px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13.5px;
+    font-weight: 500;
     user-select: none;
-    cursor: none;
+    border-radius: 10px;
+    cursor: default;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .isu-menu-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    padding-left: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    transform: translateX(4px);
 }
 
 .isu-menu-item svg {
-    opacity: 0.6;
+    opacity: 0.5;
+    transition: all 0.2s ease;
 }
 
 .isu-menu-item:hover svg {
@@ -87,14 +92,14 @@
 }
 
 .isu-submenu-container {
-    min-width: 180px;
-    background: rgba(10, 10, 15, 0.98);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 6px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
-    cursor: none;
+    min-width: 190px;
+    background: rgba(15, 15, 20, 0.7);
+    backdrop-filter: blur(25px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 10px 15px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    cursor: default;
 }
 
 .isu-menu-submenu:hover>.isu-menu-submenu-content {

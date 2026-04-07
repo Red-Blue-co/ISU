@@ -100,30 +100,13 @@ const MovingHighlight = ({ targetPosition, color, size, texture }) => {
 };
 
 const GlobePoints = ({ points, lightsOn, hoveredIndex, selectedIndex, onPointClick, onPointHover, onGlobeHover }) => {
+    const { currentTheme } = useTheme();
     const geometryRef = useRef();
     const materialRef = useRef();
     const highlightGeometryRef = useRef();
     const highlightMaterialRef = useRef();
     const circleTexture = useMemo(() => createCircleTexture(), []);
     const mouseDownPos = useRef({ x: 0, y: 0 });
-
-    // Standard points color logic
-    useEffect(() => {
-        if (!geometryRef.current || points.length === 0) return;
-        const colors = new Float32Array(points.length * 3);
-        const colorStandard = new THREE.Color('white'); // Active white glow
-        const colorDim = new THREE.Color('#777777'); // Brighter but still "dull" state
-
-        for (let i = 0; i < points.length; i++) {
-            const hasData = points[i].hasData;
-            const color = hasData ? colorStandard : colorDim;
-            colors[i * 3] = color.r;
-            colors[i * 3 + 1] = color.g;
-            colors[i * 3 + 2] = color.b;
-        }
-        geometryRef.current.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        geometryRef.current.attributes.color.needsUpdate = true;
-    }, [points, lightsOn]);
 
     // Highlight layer logic (Render only selected dots statically)
     const selectedPointGeometry = useMemo(() => {
@@ -138,16 +121,30 @@ const GlobePoints = ({ points, lightsOn, hoveredIndex, selectedIndex, onPointCli
 
     const geometry = useMemo(() => {
         if (points.length === 0) return null;
+        
         const geo = new THREE.BufferGeometry();
         const positions = new Float32Array(points.length * 3);
+        const colors = new Float32Array(points.length * 3);
+
+        const isLight = currentTheme.name === 'Light';
+        const colorStandard = new THREE.Color(isLight ? '#000000' : 'white'); 
+        const colorDim = new THREE.Color(isLight ? '#777777' : '#555555'); // Darkened for light mode
+
         for (let i = 0; i < points.length; i++) {
             positions[i * 3] = points[i].x;
             positions[i * 3 + 1] = points[i].y;
             positions[i * 3 + 2] = points[i].z;
+
+            const color = points[i].hasData ? colorStandard : colorDim;
+            colors[i * 3] = color.r;
+            colors[i * 3 + 1] = color.g;
+            colors[i * 3 + 2] = color.b;
         }
+
         geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
         return geo;
-    }, [points]);
+    }, [points, currentTheme.name]);
 
     useFrame((state) => {
         if (!materialRef.current) return;
@@ -375,6 +372,7 @@ const CameraController = ({ targetPosition, isZoomed, onZoomComplete, isGlobeHov
 };
 
 const DottedGlobe = () => {
+    const { currentTheme } = useTheme();
     const [points, setPoints] = useState([]);
     const [lightsOn] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
@@ -545,8 +543,33 @@ const DottedGlobe = () => {
     return (
         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
             {isLoading && (
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 20 }}>
-                    <div style={{ color: 'white' }}>Loading 3D Globe...</div>
+                <div style={{ 
+                    position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
+                    zIndex: 20, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: currentTheme.name === 'Light' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(15, 15, 20, 0.4)',
+                    backdropFilter: 'blur(10px) saturate(180%)',
+                    borderRadius: '24px' // assuming rounded container edge fit
+                }}>
+                    <style>{`
+                        @keyframes skeleton-spin-globe { 
+                            0% { background-position: 0px 0px; } 
+                            100% { background-position: 240px 0px; } 
+                        }
+                        @keyframes globe-pulse { 
+                            0%, 100% { opacity: 0.6; transform: scale(0.98); filter: blur(0px); } 
+                            50% { opacity: 0.9; transform: scale(1.02); filter: blur(1px); } 
+                        }
+                    `}</style>
+                    
+                    {/* Phantom Dotted Globe Synthesis */}
+                    <div style={{
+                        width: '50vh', height: '50vh', maxWidth: '400px', maxHeight: '400px', borderRadius: '50%',
+                        backgroundImage: `radial-gradient(${currentTheme.colors.primary} 45%, transparent 50%)`,
+                        backgroundPosition: '0px 0px',
+                        backgroundSize: '18px 18px',
+                        boxShadow: `inset -45px -45px 80px rgba(0,0,0,0.98), inset 20px 20px 60px ${currentTheme.colors.primary}30, 0 0 60px ${currentTheme.colors.primary}15`,
+                        animation: 'skeleton-spin-globe 6s linear infinite, globe-pulse 3s ease-in-out infinite',
+                    }} />
                 </div>
             )}
             <Canvas

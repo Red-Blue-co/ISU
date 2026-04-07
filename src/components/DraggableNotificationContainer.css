@@ -1,0 +1,147 @@
+.isu-notification-stack {
+    position: fixed;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 320px;
+    user-select: none;
+}
+
+.isu-notification-drag-handle {
+    width: 100%;
+    height: 12px;
+    cursor: grab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.isu-notification-stack:hover .isu-notification-drag-handle {
+    opacity: 1;
+}
+.isu-notification-drag-handle:active {
+    cursor: grabbing;
+}
+.isu-notification-drag-handle::before {
+    content: '';
+    width: 36px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+}
+
+.isu-notification-item {
+    background: rgba(20, 20, 25, 0.65);
+    backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;   /* Pill shape */
+    padding: 10px 16px 10px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    animation: toastPoundIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    color: white;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.isu-notification-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+@keyframes toastPoundIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.85);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.isu-notification-icon-bg {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.isu-notification-content {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.3;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.2px;
+}
+
+.isu-notification-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.3);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.isu-notification-close:hover {
+    color: white;
+    background: rgba(255,255,255,0.15);
+}
+
+/* Subtle type glowing outlines instead of thick borders */
+.isu-notification-item.type-success { box-shadow: 0 10px 40px rgba(0, 230, 118, 0.1), inset 0 0 0 1px rgba(0, 230, 118, 0.2); }
+.isu-notification-item.type-error { box-shadow: 0 10px 40px rgba(255, 23, 68, 0.1), inset 0 0 0 1px rgba(255, 23, 68, 0.2); }
+.isu-notification-item.type-warning { box-shadow: 0 10px 40px rgba(255, 234, 0, 0.1), inset 0 0 0 1px rgba(255, 234, 0, 0.2); }
+.isu-notification-item.type-info { box-shadow: 0 10px 40px rgba(0, 255, 204, 0.1), inset 0 0 0 1px rgba(0, 255, 204, 0.2); }
+
+.isu-notification-item.type-success .isu-notification-icon-bg { background: rgba(0, 230, 118, 0.15); }
+.isu-notification-item.type-error .isu-notification-icon-bg { background: rgba(255, 23, 68, 0.15); }
+.isu-notification-item.type-warning .isu-notification-icon-bg { background: rgba(255, 234, 0, 0.15); }
+.isu-notification-item.type-info .isu-notification-icon-bg { background: rgba(0, 255, 204, 0.15); }
+
+/* Unicorn Easter Egg Mode */
+.isu-notification-item.type-unicorn {
+    box-shadow: 0 10px 40px rgba(255, 0, 255, 0.2), inset 0 0 0 1px rgba(255, 0, 255, 0.3);
+    animation: toastPoundIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), unicornGlow 2s infinite linear;
+}
+.isu-notification-item.type-unicorn .isu-notification-icon-bg { 
+    background: linear-gradient(135deg, #ff0055, #ff9900, #ffee00, #00ff44, #0099ff, #aa00ff);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes unicornGlow {
+    0% { box-shadow: 0 10px 40px rgba(255, 0, 85, 0.2), inset 0 0 0 1px rgba(255, 0, 85, 0.3); }
+    33% { box-shadow: 0 10px 40px rgba(0, 255, 68, 0.2), inset 0 0 0 1px rgba(0, 255, 68, 0.3); }
+    66% { box-shadow: 0 10px 40px rgba(0, 153, 255, 0.2), inset 0 0 0 1px rgba(0, 153, 255, 0.3); }
+    100% { box-shadow: 0 10px 40px rgba(255, 0, 85, 0.2), inset 0 0 0 1px rgba(255, 0, 85, 0.3); }
+}
+
+/* Progress bar inside the pill */
+.isu-notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 0 2px 2px 0;
+    transition: width 0.1s linear;
+}
+.isu-notification-progress.paused {
+    background: rgba(255,255,255,0.6);
+}

@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import About from './pages/About';
 import { LoaderProvider, useLoader } from './context/LoaderContext';
+import { NotificationProvider } from './context/NotificationContext';
+import DraggableNotificationContainer from './components/DraggableNotificationContainer';
 
 import Loader from './components/Loader';
 
@@ -59,6 +61,7 @@ function AppContent() {
 
           <ContextMenu />
           <MagicCursor />
+          <DraggableNotificationContainer />
         </div>
       </div>
     </>
@@ -68,7 +71,9 @@ function AppContent() {
 function App() {
   return (
     <LoaderProvider>
-      <AppContent />
+      <NotificationProvider>
+        <AppContent />
+      </NotificationProvider>
     </LoaderProvider>
   );
 }
