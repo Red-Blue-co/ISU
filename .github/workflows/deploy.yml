@@ -1,5 +1,4 @@
-# Builds the site on every push to main and publishes it to the gh-pages branch,
-# which GitHub Pages serves at isu.sherin.fun
+# Builds the site and publishes it to GitHub Pages (isu.sherin.fun) on every push to main
 name: Deploy ISU to GitHub Pages
 
 on:
@@ -8,15 +7,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
+  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,20 +24,20 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - uses: actions/configure-pages@v5
       - run: npm ci
       - run: npm run build
       # Pages has no server routing: serve the app for unknown paths so /about, /community and /login load directly
       - run: cp dist/index.html dist/404.html
-      - uses: peaceiris/actions-gh-pages@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          cname: isu.sherin.fun
-          user_name: Sherin Varghese
-          user_email: sherinv.de@gmail.com
-          commit_message: Publish
-      # Updates made by the workflow don't start a Pages build on their own, so ask for one
-      - run: gh api --method POST "repos/${{ github.repository }}/pages/builds"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
