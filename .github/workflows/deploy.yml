@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: pages
@@ -36,3 +37,7 @@ jobs:
           user_name: Sherin Varghese
           user_email: sherinv.de@gmail.com
           commit_message: Publish
+      # Updates made by the workflow don't start a Pages build on their own, so ask for one
+      - run: gh api --method POST "repos/${{ github.repository }}/pages/builds"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
