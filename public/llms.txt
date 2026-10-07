@@ -1,0 +1,8 @@
+# ISU Student Community
+
+> ISU is a student community run entirely by students: help with paperwork, housing and studies, events every week, and groups for every part of student life. Website made by Sherin Varghese (https://sherin.fun).
+
+- [Home](https://isu.sherin.fun/)
+- [Community and groups](https://isu.sherin.fun/community)
+- [About ISU](https://isu.sherin.fun/about)
+- [Join on WhatsApp](https://chat.whatsapp.com/FskALyv9NqNBjOLXeu5Si1)

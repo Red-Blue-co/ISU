@@ -1,0 +1,7 @@
+# isu.sherin.fun by Sherin Varghese (https://sherin.fun)
+
+User-agent: *
+Allow: /
+Disallow: /login
+
+Sitemap: https://isu.sherin.fun/sitemap.xml
