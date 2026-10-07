@@ -205,7 +205,7 @@ export const Footer = () => (
         </div>
         <LightWall />
         <div className="foot-base">
-            <span>© {new Date().getFullYear()} ISU</span>
+            <span>© {new Date().getFullYear()} ISU · Website by <a href="https://sherin.fun" rel="author">Sherin Varghese</a></span>
             <span>Made by students, for students.</span>
         </div>
     </footer>

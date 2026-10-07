@@ -278,6 +278,7 @@
 .foot-cols a:hover { color: var(--text-color); }
 /* the light wall sits inside the footer */
 .home-foot .lightwall { padding: 72px 0 40px; }
+.foot-base a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .foot-base { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--muted); font-size: 0.85rem; }
 
 

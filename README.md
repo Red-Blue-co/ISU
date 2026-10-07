@@ -111,6 +111,15 @@ if (coffee) {
 }
 ```
 
+## Author
+
+**Sherin Varghese**, software engineer in Berlin
+
+- Website and portfolio: [sherin.fun](https://sherin.fun)
+- GitHub: [@Sherin-V](https://github.com/Sherin-V)
+- LinkedIn: [Sherin Varghese](https://www.linkedin.com/in/sherin-varghese-04b6831ba/)
+- Email: [admin@sherin.fun](mailto:admin@sherin.fun)
+
 ---
 
 <div align="center">
