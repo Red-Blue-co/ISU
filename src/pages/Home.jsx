@@ -25,8 +25,8 @@ const PILLARS = [
     {
         word: 'BUILD',
         text: 'Every event, every decision, every line of this site is made by students who said yes. Bring an idea and we will build it with you.',
-        img: photo('photo-1530099486328-e021101a494a'),
-        alt: 'Students planning together around a table',
+        img: photo('photo-1758270704763-22072a90d3b6'),
+        alt: 'Students talking and laughing in a lecture hall',
     },
 ];
 
@@ -82,6 +82,54 @@ const Pillar = ({ word, text, img, alt }) => {
     );
 };
 
+// Phones: the photo stays pinned in place. A short black band with a word slides up over it and
+// wipes in its photo: above the band the old photo (or nothing), below it and through the letters the new one.
+const PillarsPhone = () => {
+    const items = useRef([]);
+    const photos = useRef([]);
+    useEffect(() => {
+        let frame = 0;
+        const check = () => {
+            frame = 0;
+            items.current.forEach((el, i) => {
+                const img = photos.current[i];
+                if (!el || !img) return;
+                // show this photo from the band's top edge down (measured from the photo's own top,
+                // which is not pinned yet while the section is still scrolling into view)
+                const box = img.getBoundingClientRect();
+                const top = Math.min(box.height, Math.max(0, el.getBoundingClientRect().top - box.top));
+                img.style.clipPath = `inset(${top}px 0 0 0)`;
+            });
+        };
+        const onScroll = () => { if (!frame) frame = requestAnimationFrame(check); };
+        check();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); };
+    }, []);
+    return (
+        <section className="pstage">
+            <div className="pstage-photos" aria-hidden="true">
+                {PILLARS.map((p, i) => (
+                    <img key={p.word} src={p.img} alt="" ref={(el) => { photos.current[i] = el; }}
+                        style={{ clipPath: 'inset(100% 0 0 0)' }} />
+                ))}
+            </div>
+            <div className="pstage-words">
+                {PILLARS.map((p, i) => (
+                    <React.Fragment key={p.word}>
+                        <div className="pstage-item" ref={(el) => { items.current[i] = el; }}>
+                            <h2>{p.word}</h2>
+                            <p>{p.text}</p>
+                        </div>
+                        {/* an open stretch where the whole photo shows */}
+                        <div className="pstage-gap" />
+                    </React.Fragment>
+                ))}
+            </div>
+        </section>
+    );
+};
+
 const Home = () => {
     const stepsRef = useReveal();
 
@@ -121,6 +169,7 @@ const Home = () => {
             {/* ---------- pillars ---------- */}
             <div id="pillars">
                 {PILLARS.map((p) => <Pillar key={p.word} {...p} />)}
+                <PillarsPhone />
             </div>
 
             <Topics />

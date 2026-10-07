@@ -67,11 +67,12 @@
 /* ---------- pillars: giant word, then a photo sweeps up over it ---------- */
 .pillar { position: relative; background: var(--text-color); }
 .pillar-word {
-    height: 150vh;
+    height: 150vh; height: 150svh;
     background: var(--text-color); color: var(--bg-color);
 }
 .pillar-word-sticky {
-    position: sticky; top: 0; height: 100vh;
+    /* svh: the small screen height, so phones don't jump when the address bar shows or hides */
+    position: sticky; top: 0; height: 100vh; height: 100svh;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
     overflow: hidden;
 }
@@ -85,7 +86,7 @@
 }
 .pillar-photo {
     position: relative; z-index: 1;
-    height: 100vh; margin-top: -50vh;
+    height: 100vh; height: 100svh; margin-top: -50vh; margin-top: -50svh;
     overflow: hidden;
     /* opens from a framed window to full width as it rises */
     clip-path: inset(0 calc(max(0, 0.5 - var(--p, 0)) * 16vw) round calc(max(0, 0.5 - var(--p, 0)) * 48px));
@@ -107,6 +108,30 @@
     max-width: 640px;
     color: #f4f4f5;
     font-size: clamp(1.3rem, 2.4vw, 2.1rem); line-height: 1.25; letter-spacing: -0.01em; font-weight: 500;
+}
+
+/* ---------- phone pillars: one pinned photo, seen only through the passing words ---------- */
+/* the stage starts one screen early (under the section above, invisible because the photos are
+   hidden until a band reveals them), so the photo is already pinned when HELP arrives */
+.pstage { display: none; position: relative; margin-top: -100vh; margin-top: -100svh; pointer-events: none; }
+.pstage-photos { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.pstage-photos img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(0.15) contrast(1.05) brightness(1.08);
+}
+.pstage-words { position: relative; margin-top: -100vh; margin-top: -100svh; padding-top: 100vh; padding-top: 100svh; }
+/* a short black band; it is clipped to itself, so its cover never spills past it */
+.pstage-item { overflow: clip; padding: 9vh 0 9vh; padding: 9svh 0 9svh; }
+.pstage-gap { height: 90vh; height: 90svh; }
+/* white letters on black, multiplied with the photo: black hides it, the letters let it through;
+   the huge shadow is the black cover for the rest of the screen */
+.pstage-item h2 {
+    margin: 0; font-size: 34vw; font-weight: 800; letter-spacing: -0.07em; line-height: 0.85; text-align: center;
+    background: #000; color: #fff; mix-blend-mode: multiply; box-shadow: 0 0 0 200vh #000;
+}
+.pstage-item p {
+    position: relative; margin: 0; padding: 28px 24px 0; color: #fff;
+    font-size: 1.45rem; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em;
 }
 
 /* ---------- reveal on scroll ---------- */
@@ -261,9 +286,9 @@
     .home-hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; height: auto; min-height: 0; gap: 40px; padding: 0 24px 48px; }
     .home-hero-text { padding-top: 104px; }
     .home-hero-stack { height: 380px; padding-top: 0; }
-    .pillar-word { height: 120vh; }
-    .pillar-photo { height: 85vh; margin-top: -30vh; }
-    .pillar-photo p { left: 24px; bottom: 8vh; }
+    /* phones use the one-stage version below instead of the panels */
+    #pillars .pillar { display: none; }
+    .pstage { display: block; }
     .home-steps { padding: 96px 24px 80px; }
     .home-steps ol { grid-template-columns: 1fr; margin-top: 40px; }
     .home-steps li, .home-steps li + li { padding: 28px 0; border-left: 0; }
