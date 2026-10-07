@@ -56,26 +56,6 @@ export function ThemeProvider({ children }) {
     root.style.setProperty('--primary-color', colors.primary);
     root.style.setProperty('--secondary-color', colors.secondary);
     root.style.setProperty('--accent-color', colors.accent);
-
-    // Dynamically generate and apply the Favicon SVG
-    const svgIcon = `
-      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-        <rect width='100' height='100' rx='22' fill='${colors.bg}'/>
-        <text y='68' x='50' font-size='43' font-weight='900' font-family='sans-serif' fill='${colors.primary}' text-anchor='middle'>ISU</text>
-      </svg>
-    `.replace(/#/g, '%23').replace(/\n/g, '').replace(/\s+/g, ' ').trim();
-
-    const iconUri = `data:image/svg+xml,${svgIcon}`;
-    let link = document.querySelector("link[rel~='icon']");
-    
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      link.type = 'image/svg+xml';
-      document.head.appendChild(link);
-    }
-    link.href = iconUri;
-
   }, [currentTheme, customColors]);
 
   const applyTheme = (themeKey) => {

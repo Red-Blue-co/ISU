@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useReveal, tilt } from './homeHooks';
+import { useReveal } from './homeHooks';
 import { Link } from 'react-router-dom';
 import LightWall from '../components/LightWall';
+import { WHATSAPP_COMMUNITY } from '../links';
 import { Plane, House, BookOpen, Briefcase, HeartPulse, PartyPopper, Plus, ArrowUpRight, ArrowRight } from 'lucide-react';
 
 const Reveal = ({ as: Tag = 'section', className = '', children, ...rest }) => {
@@ -40,7 +41,7 @@ export const Topics = () => (
         </div>
         <div className="topics-grid">
             {TOPICS.map(({ icon: Icon, title, qs }) => (
-                <a href="#faq" className="topic tilt" key={title} {...tilt}>
+                <a href="#faq" className="topic" key={title}>
                     <Icon size={26} strokeWidth={1.6} />
                     <h3>{title}</h3>
                     <ul>{qs.map((q) => <li key={q}>{q}</li>)}</ul>
@@ -108,7 +109,7 @@ export const Crew = () => (
         </div>
         <div className="crew-grid">
             {ROLES.map((r) => (
-                <div className="crew-role tilt" key={r.title} {...tilt}>
+                <div className="crew-role" key={r.title}>
                     <h3>{r.title}</h3>
                     <p>{r.text}</p>
                     <div className="crew-seats">
@@ -119,7 +120,7 @@ export const Crew = () => (
                     </div>
                 </div>
             ))}
-            <Link to="/login" state={{ mode: 'signup' }} className="crew-role crew-own tilt" {...tilt}>
+            <Link to="/login" state={{ mode: 'signup' }} className="crew-role crew-own">
                 <Plus size={28} strokeWidth={1.6} />
                 <h3>Start your own</h3>
                 <p>Got an idea nobody is doing yet? Pitch it and we will help you run it.</p>
@@ -189,7 +190,7 @@ export const Footer = () => (
                 <h4>Community</h4>
                 <a href="/#events">Events</a>
                 <a href="/#topics">Where to start</a>
-                <Link to="/login" state={{ mode: 'signup' }}>Join</Link>
+                <a href={WHATSAPP_COMMUNITY} target="_blank" rel="noopener noreferrer">Join</a>
             </div>
             <div>
                 <h4>Help</h4>

@@ -6,6 +6,7 @@ import MagicCursor from './components/MagicCursor';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import About from './pages/About';
+import Community from './pages/Community';
 import { NotificationProvider } from './context/NotificationContext';
 import DraggableNotificationContainer from './components/DraggableNotificationContainer';
 
@@ -22,6 +23,7 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
+          <Route path="/community" element={<Community />} />
         </Routes>
 
         <ContextMenu />

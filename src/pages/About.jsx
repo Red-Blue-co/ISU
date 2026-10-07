@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { WHATSAPP_COMMUNITY } from '../links';
 import { useReveal } from './homeHooks';
 import { Footer } from './HomeSections';
 import './Home.css';
@@ -95,7 +96,7 @@ const About = () => {
                 <h2>Want to help build it?</h2>
                 <p>Join as a member, or give an hour a week to one of the teams. Either way, you are part of it.</p>
                 <div className="home-cta">
-                    <Link to="/login" state={{ mode: 'signup' }} className="home-btn primary">Join ISU <ArrowRight size={16} /></Link>
+                    <a href={WHATSAPP_COMMUNITY} target="_blank" rel="noopener noreferrer" className="home-btn primary">Join ISU <ArrowUpRight size={16} /></a>
                     <Link to="/" className="home-btn">See what we do</Link>
                 </div>
             </section>

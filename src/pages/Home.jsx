@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowUpRight, ArrowDown } from 'lucide-react';
+import { WHATSAPP_COMMUNITY } from '../links';
 import { useReveal } from './homeHooks';
 import PolaroidStack from '../components/PolaroidStack';
 import { Ribbon, Topics, Events, Crew, Voices, Faq, Footer } from './HomeSections';
@@ -99,9 +99,9 @@ const Home = () => {
                         all run by students like you.
                     </p>
                     <div className="home-cta">
-                        <Link to="/login" state={{ mode: 'signup' }} className="home-btn primary">
-                            Join ISU <ArrowRight size={16} />
-                        </Link>
+                        <a href={WHATSAPP_COMMUNITY} target="_blank" rel="noopener noreferrer" className="home-btn primary">
+                            Join ISU <ArrowUpRight size={16} />
+                        </a>
                         <a href="#pillars" className="home-btn">What we do <ArrowDown size={16} /></a>
                     </div>
                     <ul className="home-facts">

@@ -78,8 +78,8 @@ const LightWall = () => {
             }
             // switch-on order: the word first, then everyone else at random
             const order = [...shuffle(letters), ...shuffle(rest)];
-            // never round a real member away: anyone who joined gets a light
-            const lit = Math.min(order.length, Math.max(Math.min(MEMBERS, 1), Math.round(order.length * fill)));
+            // never round a member away, and never show more lights than there are members
+            const lit = Math.min(order.length, MEMBERS, Math.max(Math.min(MEMBERS, 1), Math.round(order.length * fill)));
             order.forEach((b, i) => { b.on = i < lit ? i / lit : Infinity; });
             bulbs = order;
         };

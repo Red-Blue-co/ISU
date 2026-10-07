@@ -152,14 +152,6 @@
 .ribbon-track .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text-color); }
 @keyframes ribbon { to { transform: translateX(-50%); } }
 
-/* ---------- cards that lean toward the cursor ---------- */
-.tilt {
-    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.35s ease, color 0.35s ease, border-color 0.3s;
-    will-change: transform;
-}
-.tilt:hover { transition-duration: 0.12s, 0.35s, 0.35s, 0.3s; }
-
 /* ---------- topics ---------- */
 .topics, .events, .crew, .faq { padding: 140px max(24px, 5vw) 0; }
 .topics-grid {
@@ -175,10 +167,10 @@
 }
 .topic h3 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; margin: 28px 0 14px; }
 .topic ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; color: var(--muted); transition: color 0.35s; }
-.topic-arrow { position: absolute; top: 34px; right: 30px; opacity: 0; transform: translate(-6px, 6px); transition: opacity 0.3s, transform 0.3s; }
+.topic-arrow { position: absolute; top: 34px; right: 30px; opacity: 0; transition: opacity 0.3s; }
 .topic:hover { background: var(--text-color); color: var(--bg-color); z-index: 1; }
 .topic:hover ul { color: color-mix(in srgb, var(--bg-color) 65%, transparent); }
-.topic:hover .topic-arrow { opacity: 1; transform: none; }
+.topic:hover .topic-arrow { opacity: 1; }
 
 /* ---------- events ---------- */
 .events-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
@@ -208,9 +200,9 @@
     padding: 30px 28px; border-radius: 18px;
     border: 1px solid var(--line); background: var(--soft);
     color: var(--text-color); text-decoration: none;
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
 }
-.crew-role:hover { --lift: -4px; border-color: color-mix(in srgb, var(--text-color) 30%, transparent); }
+.crew-role:hover { border-color: color-mix(in srgb, var(--text-color) 30%, transparent); }
 .crew-role h3 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; }
 .crew-role p { color: var(--muted); line-height: 1.55; flex: 1; }
 .crew-seats { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; font-weight: 600; margin-top: 10px; }
@@ -281,7 +273,7 @@
     .topics-grid, .crew-grid, .voices { grid-template-columns: 1fr; }
     .topic { padding: 28px 24px; }
     .topic h3 { margin-top: 18px; }
-    .topic-arrow { opacity: 1; transform: none; }
+    .topic-arrow { opacity: 1; }
     .event { grid-template-columns: 72px minmax(0, 1fr); gap: 16px; padding: 22px 0; }
     .event:hover { padding-left: 0; padding-right: 0; }
     .event-date { flex-direction: column; gap: 2px; }
@@ -295,7 +287,6 @@
     .home-foot { padding-top: 56px; }
     .foot-cols { gap: 40px; }
     .home-foot .lightwall { padding: 56px 0 32px; }
-    .tilt { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -303,5 +294,4 @@
     .reveal > * { opacity: 1; transform: none; transition: none; }
     .pillar-word h2, .pillar-photo img { transform: none; }
     .pillar-photo { clip-path: none; }
-    .tilt { transform: none; }
 }
