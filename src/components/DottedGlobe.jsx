@@ -265,7 +265,7 @@ const GlobePoints = ({ points, lightsOn, hoveredIndex, selectedIndex, onPointCli
 };
 
 // Camera Controller: Handles cinematic zoom to 5.05 distance
-const CameraController = ({ targetPosition, isZoomed, onZoomComplete, isGlobeHovered, onProgress }) => {
+const CameraController = ({ targetPosition, isZoomed, onZoomComplete, isGlobeHovered, onProgress, allowZoom = true }) => {
     const { camera, gl } = useThree();
     const controlsRef = useRef();
     const mode = useRef('IDLE');
@@ -360,7 +360,7 @@ const CameraController = ({ targetPosition, isZoomed, onZoomComplete, isGlobeHov
             ref={controlsRef}
             enabled={mode.current === 'IDLE'}
             enablePan={false}
-            enableZoom={mode.current === 'IDLE'}
+            enableZoom={allowZoom && mode.current === 'IDLE'}
             enableKeys={false}
             minDistance={6.0} // Prevent manual clipping (was 4.0)
             maxDistance={50}
@@ -371,7 +371,7 @@ const CameraController = ({ targetPosition, isZoomed, onZoomComplete, isGlobeHov
     );
 };
 
-const DottedGlobe = () => {
+const DottedGlobe = ({ onReady, allowZoom = true } = {}) => {
     const { currentTheme } = useTheme();
     const [points, setPoints] = useState([]);
     const [lightsOn] = useState(true);
@@ -540,9 +540,12 @@ const DottedGlobe = () => {
         }, 10);
     }, []);
 
+    // Let the page know once the dots exist, so it can fade out its own placeholder
+    useEffect(() => { if (!isLoading) onReady?.(); }, [isLoading, onReady]);
+
     return (
         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            {isLoading && (
+            {isLoading && !onReady && (
                 <div style={{ 
                     position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
                     zIndex: 20, display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -604,6 +607,7 @@ const DottedGlobe = () => {
                             isZoomed={!!focusTarget}
                             onZoomComplete={handleZoomComplete}
                             isGlobeHovered={isGlobeHovered}
+                            allowZoom={allowZoom}
                             onProgress={setZoomProgress}
                         />
                     </>

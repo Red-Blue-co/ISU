@@ -1,0 +1,55 @@
+/* A pile of polaroids, held at a fixed 3D angle. */
+.pstack {
+    position: relative;
+    width: 100%; height: 100%;
+    display: grid; place-items: center;
+    perspective: 1400px;
+    cursor: pointer;
+    outline: none;
+}
+.pstack-plane {
+    position: relative;
+    width: min(330px, 62%); aspect-ratio: 0.84;
+    transform-style: preserve-3d;
+    transform: rotateY(-14deg) rotateX(7deg);
+}
+
+.polaroid {
+    position: absolute; inset: 0; margin: 0;
+    padding: 4.5% 4.5% 0;
+    background: #f7f6f2;
+    box-shadow: 0 30px 50px -22px rgba(0, 0, 0, 0.75), 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translate3d(var(--x), var(--y), var(--z)) rotate(var(--r));
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation: polaroid-deal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) var(--deal) both;
+    user-select: none;
+}
+/* the front photo flies off to the side before it slides to the back of the pile */
+.polaroid.leaving {
+    transform: translate3d(85%, -12%, 120px) rotate(18deg);
+    transition-duration: 0.38s;
+}
+.polaroid img {
+    display: block; width: 100%; aspect-ratio: 1; object-fit: cover;
+    filter: saturate(0.92) contrast(1.04);
+    pointer-events: none;
+}
+.polaroid figcaption {
+    padding: 6% 0 7%;
+    text-align: center;
+    font: 600 clamp(1.1rem, 1.6vw, 1.45rem) 'Caveat', cursive;
+    color: #2a2a2a;
+}
+@keyframes polaroid-deal {
+    from { opacity: 0; transform: translate3d(0, 40%, 200px) rotate(0deg); }
+}
+
+.pstack:focus-visible .pstack-plane { outline: 2px solid var(--text-color); outline-offset: 24px; }
+
+@media (max-width: 900px) {
+    .pstack-plane { width: min(190px, 48vw); transform: rotateY(-8deg) rotateX(5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .polaroid { animation: none; transition: none; }
+}

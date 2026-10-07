@@ -1,0 +1,217 @@
+/* Login: a calm form on the left, the interactive dotted globe on the right.
+   Colours come from the theme variables so all three themes work. */
+.login {
+    --line: color-mix(in srgb, var(--text-color) 12%, transparent);
+    --soft: color-mix(in srgb, var(--text-color) 4%, transparent);
+    --muted: color-mix(in srgb, var(--text-color) 58%, transparent);
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ---------- form panel ---------- */
+.login-panel {
+    flex: 0 0 min(480px, 44%);
+    display: flex;
+    flex-direction: column;
+    padding: 32px 48px;
+    border-right: 1px solid var(--line);
+    position: relative;
+    z-index: 2;
+}
+.login-top { display: flex; justify-content: space-between; align-items: center; }
+.login-brand {
+    font-weight: 800; font-size: 1.25rem; letter-spacing: 0.08em;
+    color: var(--text-color); text-decoration: none;
+}
+.login-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.82rem; color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+}
+.login-back:hover { color: var(--text-color); }
+
+.login-body {
+    margin: auto 0;
+    width: 100%;
+    max-width: 360px;
+    padding: 40px 0;
+}
+/* On first load the pieces rise in one after another */
+.login-body > * { animation: login-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.login-body > :nth-child(2) { animation-delay: 0.06s; }
+.login-body > :nth-child(3) { animation-delay: 0.12s; }
+.login-body > :nth-child(4) { animation-delay: 0.18s; }
+.login-body > :nth-child(5) { animation-delay: 0.24s; }
+@keyframes login-in { from { opacity: 0; transform: translateY(10px); } }
+
+/* Any block that opens/closes between modes: height, fade and a small lift, all together */
+.login-reveal {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transition:
+        grid-template-rows 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.2s ease,
+        transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.login-reveal.open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transform: none;
+    transition:
+        grid-template-rows 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.4s ease 0.12s,
+        transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.login-reveal > fieldset {
+    min-height: 0; min-width: 0; margin: 0; padding: 0; border: 0;
+    overflow: clip; overflow-clip-margin: 6px; /* room for the focus ring */
+}
+
+/* Text that changes with the mode slides in from the side you switched towards */
+.login-heading { overflow: hidden; margin: -4px -8px 0; padding: 4px 8px 0; }
+.login-swap { display: block; animation: login-swap-up 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.login-swap.from-right { animation-name: login-swap-right; }
+.login-swap.from-left { animation-name: login-swap-left; }
+.login-field-row .login-swap { display: inline-block; }
+@keyframes login-swap-up { from { opacity: 0; transform: translateY(8px); filter: blur(4px); } }
+@keyframes login-swap-right { from { opacity: 0; transform: translateX(28px); filter: blur(6px); } }
+@keyframes login-swap-left { from { opacity: 0; transform: translateX(-28px); filter: blur(6px); } }
+
+.login-title { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin: 0; }
+.login-sub { color: var(--muted); font-size: 0.95rem; margin: 8px 0 28px; }
+
+/* Sign in | Sign up switch */
+.login-tabs {
+    position: relative;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding: 4px; margin-bottom: 24px;
+    border: 1px solid var(--line); border-radius: 12px;
+    background: var(--soft);
+}
+.login-tabs button {
+    position: relative; z-index: 1;
+    padding: 9px 0; border: 0; background: none; cursor: pointer;
+    font: inherit; font-size: 0.88rem; font-weight: 600;
+    color: var(--muted); transition: color 0.25s;
+}
+.login-tabs button.on { color: var(--bg-color); }
+.login-tabs-pill {
+    position: absolute; top: 4px; bottom: 4px; left: 4px;
+    width: calc(50% - 4px); border-radius: 9px;
+    background: var(--text-color);
+    box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--text-color) 60%, transparent);
+    /* a little spring: it overshoots and settles */
+    transition: transform 0.55s cubic-bezier(0.34, 1.45, 0.5, 1);
+}
+.login-tabs-pill.right { transform: translateX(100%); }
+.login-tabs button { transition: color 0.3s ease 0.08s; }
+.login-tabs button:not(.on):hover { color: var(--text-color); }
+
+.login-form { display: flex; flex-direction: column; }
+.login-field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+.login-field > span { font-size: 0.8rem; font-weight: 600; }
+.login-field-row { display: flex; justify-content: space-between; align-items: baseline; }
+.login-field input {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid var(--line); border-radius: 10px;
+    background: var(--soft); color: var(--text-color);
+    font: inherit; font-size: 0.92rem;
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.login-field input::placeholder { color: color-mix(in srgb, var(--text-color) 32%, transparent); }
+.login-field input:focus {
+    border-color: color-mix(in srgb, var(--text-color) 55%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--text-color) 8%, transparent);
+}
+.login-pass { position: relative; }
+.login-pass input { padding-right: 44px; }
+.login-eye {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    display: grid; place-items: center; width: 34px; height: 34px;
+    border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 8px;
+}
+.login-eye:hover { color: var(--text-color); }
+
+.login-link {
+    border: 0; background: none; padding: 0; cursor: pointer;
+    font: inherit; font-size: 0.8rem; font-weight: 500; color: var(--muted);
+    display: inline-flex; align-items: center; gap: 6px;
+}
+.login-link:hover { color: var(--text-color); text-decoration: underline; text-underline-offset: 3px; }
+.login-return { margin-top: 20px; }
+.login-forgot { opacity: 0; transform: translateX(6px); pointer-events: none; transition: opacity 0.3s, transform 0.3s; }
+.login-forgot.show { opacity: 1; transform: none; pointer-events: auto; }
+
+.login-submit {
+    margin-top: 6px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px; border: 0; border-radius: 10px; cursor: pointer;
+    background: var(--text-color); color: var(--bg-color);
+    font: inherit; font-size: 0.95rem; font-weight: 600;
+    transition: opacity 0.2s, transform 0.15s;
+}
+.login-submit:hover { opacity: 0.88; }
+.login-submit:active { transform: scale(0.99); }
+.login-submit:disabled { opacity: 0.7; cursor: default; }
+.login-submit { overflow: hidden; }
+.login-submit-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    animation: login-swap-up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.login-submit:hover svg { transform: translateX(3px); }
+.login-submit svg { transition: transform 0.2s; }
+.login-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: currentColor;
+    animation: login-pulse 0.9s ease-in-out infinite;
+}
+@keyframes login-pulse { 50% { opacity: 0.25; transform: scale(0.7); } }
+
+.login-or {
+    display: flex; align-items: center; gap: 12px;
+    margin: 24px 0 14px; color: var(--muted); font-size: 0.78rem;
+}
+.login-or::before, .login-or::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+.login-social { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.login-social button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 11px; border: 1px solid var(--line); border-radius: 10px;
+    background: transparent; color: var(--text-color); cursor: pointer;
+    font: inherit; font-size: 0.86rem; font-weight: 500;
+    transition: background 0.2s;
+}
+.login-social button:hover { background: var(--soft); }
+
+.login-foot { font-size: 0.75rem; color: var(--muted); }
+
+/* ---------- globe ---------- */
+.login-globe { flex: 1; position: relative; min-height: 100vh; overflow: hidden; }
+.login-globe > .globe-stage { position: absolute; inset: 0; }
+
+/* ---------- phones & small tablets: globe on top, form below ---------- */
+@media (max-width: 900px) {
+    .login { flex-direction: column-reverse; }
+    .login-panel { flex: 1; border-right: 0; padding: 20px 20px 24px; }
+    .login-top {
+        position: absolute; top: calc(-38vh + 16px); left: 20px; right: 20px;
+    }
+    .login-body { max-width: none; padding: 8px 0 24px; margin: 0; }
+    .login-title { font-size: 1.6rem; }
+    .login-sub { margin-bottom: 20px; }
+    .login-globe { flex: 0 0 38vh; min-height: 38vh; border-bottom: 1px solid var(--line); }
+    .login-globe .globe-stage-orb { width: 28vh; }
+    .login-foot { text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login-body > *, .login-swap, .login-submit-label, .login-dot { animation: none; }
+    .login-reveal, .login-reveal.open, .login-tabs-pill { transition: none; }
+}

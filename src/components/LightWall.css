@@ -1,0 +1,50 @@
+/* A wall of warm lights. It stays a dark panel in every theme, so the lights always glow. */
+.lightwall { padding: 140px max(24px, 5vw) 0; }
+.lightwall-text {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 16px 48px;
+    margin-bottom: 48px;
+}
+.lightwall-text h2 {
+    font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 800; letter-spacing: -0.045em; line-height: 0.98;
+    margin: 0;
+}
+.lightwall-text p { color: color-mix(in srgb, var(--text-color) 58%, transparent); font-size: 1.1rem; line-height: 1.5; max-width: 520px; margin: 0; }
+.lightwall-text .home-btn { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
+
+.lightwall-stage { perspective: 1800px; }
+.lightwall-board {
+    --fill: 0.5;
+    position: relative;
+    height: clamp(300px, 34vw, 520px);
+    border-radius: 28px;
+    background: #08080a;
+    border: 1px solid #222226;
+    overflow: hidden;
+    /* the room glows as much as the wall is lit */
+    box-shadow:
+        0 0 0 1px rgba(255, 214, 140, calc(var(--fill) * 0.08)),
+        0 40px 120px -30px rgba(255, 190, 90, calc(var(--fill) * 0.45)),
+        0 0 160px -20px rgba(255, 200, 110, calc(var(--fill) * var(--fill) * var(--fill) * 0.4)),
+        0 30px 60px -30px rgba(0, 0, 0, 0.8);
+    /* lies back, then stands up as it scrolls in */
+    transform: rotateX(28deg) scale(0.94);
+    transform-origin: 50% 100%;
+    transition: transform 1.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lightwall-board.in { transform: none; }
+.lightwall-board::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 120%, rgba(255, 200, 120, calc(var(--fill) * 0.16)), transparent 60%);
+}
+.lightwall-board canvas { display: block; }
+
+@media (max-width: 900px) {
+    .lightwall { padding: 96px 16px 0; }
+    .lightwall-text { grid-template-columns: 1fr; margin-bottom: 32px; }
+    .lightwall-text .home-btn { grid-column: auto; grid-row: auto; justify-self: start; margin-top: 8px; }
+    .lightwall-board { height: 300px; border-radius: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lightwall-board { transform: none; transition: none; }
+}

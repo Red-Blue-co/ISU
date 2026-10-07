@@ -1,10 +1,20 @@
 /* Navbar Styles */
+/* Frosted bar so it stays readable over the white word panels and photos.
+   It lives on a pseudo-element: a backdrop-filter on the nav itself would trap the fixed phone menu. */
+.isu-navbar::before {
+    content: '';
+    position: absolute; inset: 0; z-index: -1;
+    background: color-mix(in srgb, var(--bg-color) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
+}
 .isu-navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1.5rem 2rem;
+    padding: 1.1rem max(24px, 5vw);
     display: flex;
     justify-content: space-between;
     align-items: center;
