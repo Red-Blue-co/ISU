@@ -81,7 +81,7 @@ This platform includes:
   <img src="https://img.shields.io/badge/Email-ef4444?style=for-the-badge&logo=gmail&logoColor=white" />
 </a>
 
-<a href="https://linkedin.com/in/sherinv0404">
+<a href="https://www.linkedin.com/in/sherin-varghese-04b6831ba/">
   <img src="https://img.shields.io/badge/LinkedIn-3b82f6?style=for-the-badge&logo=linkedin&logoColor=white" />
 </a>
 
