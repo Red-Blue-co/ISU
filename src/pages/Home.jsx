@@ -110,7 +110,7 @@ const PillarsPhone = () => {
         <section className="pstage">
             <div className="pstage-photos" aria-hidden="true">
                 {PILLARS.map((p, i) => (
-                    <img key={p.word} src={p.img} alt="" ref={(el) => { photos.current[i] = el; }}
+                    <img key={p.word} src={p.img} alt={p.alt} ref={(el) => { photos.current[i] = el; }}
                         style={{ clipPath: 'inset(100% 0 0 0)' }} />
                 ))}
             </div>

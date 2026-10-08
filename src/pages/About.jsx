@@ -85,7 +85,7 @@ const About = () => {
 
             {/* ---------- one big line over a photo ---------- */}
             <section className="about-quote">
-                <img src={ph('photo-1758270704524-596810e891b5', 2000)} alt="" />
+                <img src={ph('photo-1758270704524-596810e891b5', 2000)} alt="ISU students together on campus" />
                 <blockquote>
                     By students.<br />For students.<br /><span>That is the whole idea.</span>
                 </blockquote>

@@ -4,11 +4,11 @@ import './PolaroidStack.css';
 // Unsplash photos (free licence); swap for real ISU photos when we have them
 const ph = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=700&h=700&q=70`;
 const PHOTOS = [
-    { src: ph('photo-1517486808906-6ca8b3f04846'), caption: 'sunday picnic' },
-    { src: ph('photo-1758270705317-3ef6142d306f'), caption: 'study night' },
-    { src: ph('photo-1549057446-9f5c6ac91a04'), caption: 'first week walk' },
-    { src: ph('photo-1530099486328-e021101a494a'), caption: 'events crew' },
-    { src: ph('photo-1543269865-cbf427effbad'), caption: 'coffee after class' },
+    { src: ph('photo-1517486808906-6ca8b3f04846'), caption: 'sunday picnic', alt: 'ISU students having a Sunday picnic together' },
+    { src: ph('photo-1758270705317-3ef6142d306f'), caption: 'study night', alt: 'ISU students studying together around a laptop' },
+    { src: ph('photo-1549057446-9f5c6ac91a04'), caption: 'first week walk', alt: 'New ISU students on a walk in their first week' },
+    { src: ph('photo-1530099486328-e021101a494a'), caption: 'events crew', alt: 'The ISU events crew together' },
+    { src: ph('photo-1543269865-cbf427effbad'), caption: 'coffee after class', alt: 'ISU students meeting for coffee after class' },
 ];
 
 // Where each place in the pile sits: the front photo first, the others fanned out behind it
@@ -67,7 +67,7 @@ const PolaroidStack = () => {
                                 zIndex: leaving === id ? 20 : 10 - depth,
                             }}
                         >
-                            <img src={p.src} alt="" draggable="false" />
+                            <img src={p.src} alt={p.alt} draggable="false" />
                             <figcaption>{p.caption}</figcaption>
                         </figure>
                     );
